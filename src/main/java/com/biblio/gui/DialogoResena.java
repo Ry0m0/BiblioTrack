@@ -1,5 +1,6 @@
 package com.biblio.gui;
 
-public class DialogoResena {
-    
-}
+import javax.swing.JDialog;
+
+public class DialogoResena extends JDialog {}
+ 
