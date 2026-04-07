@@ -1,65 +1,52 @@
 package com.biblio.modelo;
 
-/** Subclase que representa un cómic */
-public class Comic extends Publicacion {
+import java.util.ArrayList;
+import java.util.List;
 
-    private String serie;
-    private int numeroTomo;
-    private String editorial;
+public class Comic extends Publicacion implements Resenable {
 
-    /** Constructor — llama a super() obligatoriamente */
-    public Comic(String titulo, String autor, int anio, Genero genero,
-            String[] etiquetas, String serie, int numeroTomo, String editorial) {
-        super(titulo, autor, anio, genero, etiquetas);
-        if (serie == null || serie.isBlank())
-            throw new IllegalArgumentException("La serie no puede estar vacía");
-        if (numeroTomo < 1)
-            throw new IllegalArgumentException("El número de tomo debe ser mayor que 0");
-        if (editorial == null || editorial.isBlank())
-            throw new IllegalArgumentException("La editorial no puede estar vacía");
-        this.serie = serie;
-        this.numeroTomo = numeroTomo;
-        this.editorial = editorial;
-    }
 
-    /** Precio base 12€, +1€ por cada tomo que supere el 10 */
-    public double calcularPrecioReposicion() {
-        return 12.0 + (numeroTomo > 10 ? numeroTomo - 10 : 0);
-    }
+private List<Integer> puntuaciones = new ArrayList<>();
 
-    @Override
-    public String getTipo() {
-        return "COMIC";
-    }
+public Comic(String titulo, String autor, int anio, Genero genero, String[] etiquetas) {
+    super(titulo, autor, anio, genero, etiquetas);
+}
 
-    @Override
-    public String toResumen() {
-        return String.format("CÓMIC   | %-25s | %-15s | T.%02d | %.2f€",
-                getTitulo(), getSerie(), numeroTomo, calcularPrecioReposicion());
-    }
+@Override
+public void agregarResena(String comentario, int puntuacion) {
+    if (puntuacion < 1 || puntuacion > 5)
+        throw new IllegalArgumentException("Puntuación 1-5");
+    puntuaciones.add(puntuacion);
+}
 
-    @Override
-    public String toCsv() {
-        return "COMIC;" + getTitulo() + ";" + getAutor() + ";" + getAnio() + ";"
-                + getGenero() + ";" + serie + ";" + numeroTomo + ";" + editorial;
-    }
+@Override
+public double obtenerCalificacionPromedio() {
+    if (puntuaciones.isEmpty()) return 0;
+    return puntuaciones.stream().mapToInt(i -> i).average().orElse(0);
+}
 
-    @Override
-    public String toJson() {
-        return "{\"tipo\":\"COMIC\",\"titulo\":\"" + getTitulo() + "\",\"autor\":\"" + getAutor()
-                + "\",\"serie\":\"" + serie + "\",\"tomo\":" + numeroTomo + "}";
-    }
+@Override
+public int getNumeroResenas() {
+    return puntuaciones.size();
+}
 
-    // Getters
-    public String getSerie() {
-        return serie;
-    }
+@Override
+public String getTipo() { return "COMIC"; }
 
-    public int getNumeroTomo() {
-        return numeroTomo;
-    }
+@Override
+public String toResumen() {
+    return getTitulo() + " (" + getTipo() + ") ⭐" + obtenerCalificacionPromedio();
+}
 
-    public String getEditorial() {
-        return editorial;
-    }
+@Override
+public String toCsv() {
+    return "COMIC;" + getTitulo() + ";" + getAutor();
+}
+
+@Override
+public String toJson() {
+    return "{\"tipo\":\"COMIC\",\"titulo\":\"" + getTitulo() + "\"}";
+}
+
+
 }
