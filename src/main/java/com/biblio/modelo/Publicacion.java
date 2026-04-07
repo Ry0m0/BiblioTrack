@@ -1,43 +1,33 @@
 package com.biblio.modelo;
 
-import java.util.UUID;
 public abstract class Publicacion {
 
-```
-protected String titulo;
-protected String autor;
-protected int anioPublicacion;
-protected Genero genero;
 
-public Publicacion(String titulo, String autor, int anioPublicacion, Genero genero) {
+private String titulo;
+private String autor;
+private int anio;
+private Genero genero;
+private String[] etiquetas;
+
+public Publicacion(String titulo, String autor, int anio, Genero genero, String[] etiquetas) {
     this.titulo = titulo;
     this.autor = autor;
-    this.anioPublicacion = anioPublicacion;
+    this.anio = anio;
     this.genero = genero;
+    this.etiquetas = etiquetas;
 }
 
-public String getTitulo() {
-    return titulo;
-}
+public String getTitulo() { return titulo; }
+public String getAutor() { return autor; }
+public int getAnio() { return anio; }
+public Genero getGenero() { return genero; }
+public String[] getEtiquetas() { return etiquetas; }
 
-public String getAutor() {
-    return autor;
-}
+public abstract String getTipo();
+public abstract String toResumen();
+public abstract String toCsv();
+public abstract String toJson();
 
-public int getAnioPublicacion() {
-    return anioPublicacion;
-}
-
-public Genero getGenero() {
-    return genero;
-}
-
-public void mostrarInfo() {
-    System.out.println("Título: " + titulo);
-    System.out.println("Autor: " + autor);
-    System.out.println("Año: " + anioPublicacion);
-    System.out.println("Género: " + genero);
-}
-```
 
 }
+
