@@ -7,8 +7,11 @@ import com.biblio.modelo.*;
 
 public class DialogoPublicacion extends JDialog {
     
-    public DialogoPublicacion(JFrame parent, Catalogo catalogo) {
+    private VentanaPrincipal ventana;
+    
+    public DialogoPublicacion(VentanaPrincipal parent, Catalogo catalogo) {  // ← 改 JFrame → VentanaPrincipal
         super(parent, "Añadir publicación", true);
+        this.ventana = parent;
         setSize(300, 220);
         setLocationRelativeTo(parent);
         setLayout(new GridLayout(0, 2));
@@ -46,6 +49,7 @@ public class DialogoPublicacion extends JDialog {
             
             if (p != null) {
                 catalogo.agregar(p);
+                ventana.refrescarTabla();
                 dispose();
             }
         });

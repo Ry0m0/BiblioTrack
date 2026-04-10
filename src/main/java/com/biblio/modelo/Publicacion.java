@@ -17,7 +17,7 @@ public abstract class Publicacion implements Prestable {
             throw new IllegalArgumentException("Título no válido");
         if (autor == null || autor.trim().isEmpty())
             throw new IllegalArgumentException("Autor no válido");
-        if (anio < 1800 || anio > 2025)
+        if (anio < 1400 || anio > 2026)
             throw new IllegalArgumentException("Año no válido");
         this.titulo = titulo;
         this.autor = autor;

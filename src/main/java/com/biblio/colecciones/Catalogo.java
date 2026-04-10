@@ -42,7 +42,7 @@ public class Catalogo {
         System.out.printf("%-3s %-20s %-15s %-8s%n", "#", "Título", "Autor", "Tipo");
         for (int i = 0; i < publicaciones.size(); i++) {
             Publicacion p = publicaciones.get(i);
-            System.out.printf("%-3d %-20s %-15s %-8s%n", 
+            System.out.printf("%-3d %-20s %-15s %-8s%n",
                 i+1, p.getTitulo(), p.getAutor(), p.getTipo());
         }
     }
