@@ -1,8 +1,13 @@
 package com.biblio.modelo;
 
+/** Conteato de reseñas */
 public interface Resenable {
-void agregarResena(String comentario, int puntuacion);
-double obtenerCalificacionPromedio();
-int getNumeroResenas();
-}
+    /** Añade reseña (1-10) */
+    void resenar(String texto, double puntuacion);
 
+    /** Puntuacion media */
+    double getPuntuacionMedia();
+
+    /** Última reseña */
+    String getUltimaResenia();
+}

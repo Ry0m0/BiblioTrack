@@ -1,9 +1,19 @@
 package com.biblio.modelo;
 
-
+/**
+ * Géneros literarios disponibles en el sistema
+ */
 public enum Genero {
-NOVELA,
-COMIC,
-TECNICO,
-OTRO
+    FICCION,
+    NO_FICCION,
+    CIENCIA_FICCION,
+    FANTASIA,
+    TERROR,
+    ROMANCE,
+    THRILLER,
+    HISTORIA,
+    BIOGRAFIA,
+    TECNOLOGIA,
+    ARTE,
+    INFANTIL
 }

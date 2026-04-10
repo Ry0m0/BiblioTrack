@@ -13,4 +13,4 @@ public interface Prestable {
 
     /** Devuelve el nombre del usuario que la tiene */
     String getUsuarioPrestamo();
-}
+}这样呢
